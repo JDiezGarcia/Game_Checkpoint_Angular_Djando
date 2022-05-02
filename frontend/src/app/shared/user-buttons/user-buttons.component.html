@@ -1,0 +1,69 @@
+<div *appShowAuthed="false" class="navbar-buttons btn-group buttons">
+  <button
+    class="custom-button login btn"
+    id="navbar-login"
+    routerLinkActive="active"
+    [routerLink]="['/auth/login']"
+  >
+    <span>
+      <i class="fa fa-user" id="login-icon">
+        <span> Login</span>
+      </i>
+    </span>
+  </button>
+
+  <button
+    class="custom-button register btn"
+    id="navbar-register"
+    routerLinkActive="active"
+    [routerLink]="['/auth/register']"
+  >
+    <span>
+      <i class="fa" id="register">
+        <span>Register</span>
+      </i>
+    </span>
+  </button>
+</div>
+
+<div *appShowAuthed="true" class="navbar-buttons btn-group buttons">
+  <button
+    class="custom-button login btn"
+    id="navbar-login"
+    [routerLink]="['/profile', currentUser.user]"
+    routerLinkActive="active"
+  >
+    <span>
+      <div class="profile" id="profile-icon">
+        <img
+          style="max-width: 30px"
+          [src]="currentUser.img"
+          *ngIf="currentUser.img"
+        />
+        <span> {{ currentUser.user }}</span>
+      </div>
+    </span>
+  </button>
+
+  <button
+    class="custom-button settings btn"
+    id="navbar-settings"
+    routerLink="/settings"
+    routerLinkActive="active"
+  >
+    <span>
+      <i class="fa fa-cog" id="setting-icon"> </i>
+    </span>
+  </button>
+  <button
+    class="custom-button settings btn"
+    id="navbar-settings"
+    (click)="logout()"
+    routerLink="/"
+    routerLinkActive="active"
+  >
+    <span>
+      <i class="fa fa-sign-out-alt" id="sign-out"> </i>
+    </span>
+  </button>
+</div>

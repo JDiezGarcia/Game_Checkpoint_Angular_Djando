@@ -1,0 +1,9 @@
+<div class="games-content">
+    <div class="colF">
+        <app-filters [config]="filterConfig" (handleFilters)="handleFilters($event)"></app-filters>
+    </div>
+    <div class="colG">
+        <app-game-list (setTotalGame)="setTotalGame($event)" [config]='listConfig'></app-game-list>
+        <app-pagination *ngIf="totalPages > 1" (pageSelect)="setNewPage($event)" [totalPages]='totalPages' class="pagination"></app-pagination>
+    </div>
+</div>

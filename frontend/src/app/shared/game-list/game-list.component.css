@@ -1,0 +1,10 @@
+.game-card{
+  align-items: center;
+  padding: 0%;
+  --bs-gutter-x:0;
+}
+
+.app-game-card{
+    text-align: center;
+    font-weight: bold;
+}

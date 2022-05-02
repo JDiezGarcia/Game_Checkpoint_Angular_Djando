@@ -1,0 +1,14 @@
+<div class="row card-list">
+  <app-game-card
+    *ngFor="let game of results"
+    [game]="game"
+    class="col-4 game-card"
+  >
+  </app-game-card>
+</div>
+
+<div class="app-game-card" [hidden]="!loading">Loading articles...</div>
+
+<div class="app-game-card" [hidden]="results.length || !query.query">
+  LAMENTAMOS QUE NO SE HAYA ENCONTRADO NINGÚN RESULTADO PARA {{ query.query }}
+</div>

@@ -1,0 +1,8 @@
+{
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}/backend/pip_modules"
+  ],
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/backend/pip_modules"
+  ]
+}
