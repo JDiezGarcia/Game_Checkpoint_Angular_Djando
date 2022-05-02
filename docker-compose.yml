@@ -1,41 +1,41 @@
 version: "3"
 services:
-  br_db:
+  gc_db:
     image: postgres:alpine
-    container_name: "br_db"
+    container_name: "gc_db"
     env_file:
       - .env
       - config/private/${ENV:-dev}/secrets.env 
 
-  br_db_admin:
+  gc_db_admin:
     image: dpage/pgadmin4
     env_file:
       - .env
       - config/private/${ENV:-dev}/secrets.env
     logging:
       driver: none
-    container_name: "br_db_admin"
+    container_name: "gc_db_admin"
     depends_on:
-      - br_db
+      - gc_db
     volumes:
       - ./config/pgadmin.json:/pgadmin4/servers.json
 
-  br_web:
+  gc_web:
     image: nginx:latest
-    container_name: "br_web"
+    container_name: "gc_web"
     ports:
       - "80:80"
     volumes:
       - ./config/nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf:ro
       - ./data:/app_data
     depends_on:
-      - br_db_admin
-      - br_react
-      - br_django
+      - gc_db_admin
+      - gc_angular
+      - gc_django
 
-  br_react:
-    container_name: "br_react"
-    image: node:alpine
+  gc_angular:
+    container_name: "gc_angular"
+    image: node:16-alpine
     volumes:
       - ./frontend/:/home/node/app/
       - ./data:/app_data
@@ -48,11 +48,11 @@ services:
       - config/private/${ENV:-dev}/secrets.env
       - config/private/${ENV:-dev}/super-secrets.env
     depends_on:
-      - br_db
-      - br_django
+      - gc_db
+      - gc_django
 
-  br_django:
-    container_name: "br_django"
+  gc_django:
+    container_name: "gc_django"
     build: ./config/docker/django/${ENV:-dev}
     command: sh /startdjango.sh
     environment:
@@ -69,4 +69,4 @@ services:
       - config/private/${ENV:-dev}/secrets.env
       - config/private/${ENV:-dev}/super-secrets.env
     depends_on:
-      - br_db
+      - gc_db

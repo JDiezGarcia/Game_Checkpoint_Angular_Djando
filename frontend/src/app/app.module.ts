@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { UserPageModule } from './user-page/user-page.module';
 import { CoreModule} from './core/core.module';
 import { AuthModule } from './auth/auth.module';
-import { GraphQLModule } from './graphQL/graphql.module';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { GraphQLModule } from './graphQL/graphql.module';
     CoreModule,
     AuthModule,
     HttpClientModule,
-    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@ WORKDIR /app
 COPY ./frontend/ ./
 RUN npm install && npm run build
 
-FROM br_server AS static
+FROM gc_server AS static
 RUN python manage.py collectstatic
 
 FROM nginx:stable-alpine

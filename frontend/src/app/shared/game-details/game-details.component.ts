@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { GamesService, Details } from 'src/app/core';
-import { GameFollowService } from 'src/app/graphQL/game-follow.graphql.service';
 
 @Component({
     selector: 'app-game-details',
@@ -11,7 +10,7 @@ export class GameDetailsComponent {
 
     constructor(
         private gameService: GamesService,
-        private gameFollowService: GameFollowService
+        //private gameFollowService: GameFollowService
     ) { }
 
     @Input() slug!: string;
@@ -89,9 +88,9 @@ export class GameDetailsComponent {
 
     changeStatus(status: string){
         if(this.status !== 'none'){
-            this.gameFollowService.changeStatus(this.game.slug, status).subscribe((data) => {
-                console.log(data)
-            });
+            //this.gameFollowService.changeStatus(this.game.slug, status).subscribe((data) => {
+            //   console.log(data)
+            //});
         }else{
             this.gameService.gameFollow(this.game.slug, status).subscribe();
         }

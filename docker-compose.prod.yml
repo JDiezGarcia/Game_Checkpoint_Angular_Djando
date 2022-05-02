@@ -1,18 +1,18 @@
 version: "3"
 services:
-  br_db:
+  gc_db:
     image: postgres:alpine
-    container_name: "br_db"
+    container_name: "gc_db"
     env_file:
       - .env
       - config/private/prod/secrets.env 
       
-  br_server:
+  gc_server:
     build:
       context: ./
       dockerfile: ./config/docker/django/prod/Dockerfile
-    image: br_server
-    container_name: "br_server"
+    image: gc_server
+    container_name: "gc_server"
     volumes:
       - ./data:/app_data
     env_file:
@@ -20,18 +20,18 @@ services:
       - config/private/prod/secrets.env
       - config/private/prod/super-secrets.env
     depends_on:
-      - br_db
+      - gc_db
 
-  br_web:
+  gc_web:
     build:
       context: ./
       dockerfile: ./config/docker/web/prod/Dockerfile
-    image: "br_web"
-    container_name: br_web
+    image: "gc_web"
+    container_name: gc_web
     ports:
       - "80:80"
     volumes:
       - ./data:/app_data
     depends_on:
-      - br_server
+      - gc_server
 

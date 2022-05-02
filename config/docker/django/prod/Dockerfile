@@ -10,4 +10,4 @@ RUN apk add bash
 COPY ./config/scripts/wait-for-it.sh /wait.sh
 COPY ./config/scripts/start-server.sh /app-start.sh
 RUN chmod +x /wait.sh /app-start.sh
-CMD [ "/bin/bash", "/wait.sh", "br_db:5432", "--", "bash", "/app-start.sh"]
+CMD [ "/bin/bash", "/wait.sh", "gc_db:5432", "--", "bash", "/app-start.sh"]
