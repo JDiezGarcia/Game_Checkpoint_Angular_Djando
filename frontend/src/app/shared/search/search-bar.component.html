@@ -36,14 +36,14 @@
     </li>
   </ul>
   <ul [hidden]="noMatchU" class="list-group list-group-flush">
-    <li *ngFor="let user of searchUsers" class="list-group-item game-item" (click)="redirectProfile(user.user)">
+    <li *ngFor="let user of searchUsers" class="list-group-item game-item" (click)="redirectProfile(user.username)">
       <div class="row">
         <div class="col-4 img-search">
           <img src="{{user.img}}" />
         </div>
         <div class="col-8">
           <div class="row">
-            <div style="font-size: 18px" class="col">{{user.user}}</div>
+            <div style="font-size: 18px" class="col">{{user.username}}</div>
           </div>
           <div class="row">
             <div style="font-weight: bold" class="col">{{user.title}}</div>

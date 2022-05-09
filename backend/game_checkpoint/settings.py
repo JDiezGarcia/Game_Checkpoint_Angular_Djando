@@ -165,8 +165,8 @@ JWT_AUTH = {
     'UPDATE_LAST_LOGIN': True,
 
     'AUTH_HEADER_TYPES': ('Token', 'Bearer',),
-    'JWT_AUTH_COOKIE': 'brsession',
-    'JWT_REFRESH_COOKIE': 'brrefresh',
+    'JWT_AUTH_COOKIE': 'gcsession',
+    'JWT_REFRESH_COOKIE': 'gcrefresh',
     'USER_ID_FIELD': 'uuid'
 }
 

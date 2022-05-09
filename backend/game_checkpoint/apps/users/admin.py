@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AdminPanel
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from .models import User
+from .models import Follow, User
 
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -25,7 +25,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        exclude = ('last_name','date_joined', 'first_name', 'is_active', 'username',)
+        exclude = ('last_name','date_joined', 'first_name', 'is_active',)
 
     def clean_password(self):
         return self.initial["password"]
@@ -48,4 +48,17 @@ class UserAdmin(AdminPanel):
     search_fields = ('email','username')
     ordering = ('username',)
 
+class FollowAdmin(admin.ModelAdmin):
+    list_display = [f.name for f in Follow._meta.fields]
+    list_filter = ()
+    fieldsets = (
+        ('Info', {'fields': ('follower','following')}),
+    )
+    add_fieldsets = (
+        ('Info', {'fields': ('follower','following')}),
+    )
+    search_fields = ('follower','following')
+    ordering = ('follower','following')
+    
 admin.site.register(User, UserAdmin)
+admin.site.register(Follow, FollowAdmin)

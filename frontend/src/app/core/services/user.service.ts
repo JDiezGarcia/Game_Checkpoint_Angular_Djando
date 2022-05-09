@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
-
+import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../models';
@@ -21,7 +21,8 @@ export class UserService {
     constructor(
         private apiService: ApiService,
         private http: HttpClient,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        private cookieService: CookieService
     ) { }
 
     // Verify JWT in localstorage with server & load user's info.
@@ -29,20 +30,17 @@ export class UserService {
     populate() {
         // If JWT detected, attempt to get & store user's info
         if (this.jwtService.getToken()) {
-            this.apiService.get('/user')
-                .subscribe(
-                    data => this.setAuth(data.user),
-                    err => this.purgeAuth()
-                );
+            this.setAuth(this.cookieService.get('gcsession'));
         } else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
         }
     }
 
-    setAuth(user: User) {
+    setAuth(token: string) {
         // Save JWT sent from server in localstorage
-        this.jwtService.saveToken(user.token);
+        let user: User = JSON.parse(this.cookieService.get('gcuser'));
+        this.jwtService.saveToken(token);
         // Set current user data into observable
         this.currentUserSubject.next(user);
         // Set isAuthenticated to true
@@ -52,7 +50,7 @@ export class UserService {
     }
 
     purgeAuth() {
-        // Remove JWT from localstorage
+        this.apiService.post('auth/logout').subscribe();
         this.jwtService.destroyToken();
         // Set current user to an empty object
         this.currentUserSubject.next({} as User);

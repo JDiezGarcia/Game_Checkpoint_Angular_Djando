@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
         // create form group using the form builder
         this.settingsForm = this.fb.group({
             img: '',
-            user: '',
+            username: '',
             name: '',
             email: '',
             password: ''
@@ -46,7 +46,7 @@ export class SettingsComponent implements OnInit {
         this.userService
             .update(this.user)
             .subscribe(
-                updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.user),
+                updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.username),
                 err => {
                     this.errors = err;
                     this.isSubmitting = false;

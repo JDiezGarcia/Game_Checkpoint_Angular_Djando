@@ -27,11 +27,11 @@ const routes: Routes = [
         loadChildren: () =>
             import('./auth/auth.module').then((m) => m.AuthModule),
     },
-    {
-        path: 'settings',
-        canActivate: [AuthGuard],
-        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
-    },
+    // ADD IN A FUTURE {
+    //     path: 'settings',
+    //     canActivate: [AuthGuard],
+    //     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+    // },
     {
         path: 'profile',
         canActivate: [AuthGuard],
@@ -41,7 +41,7 @@ const routes: Routes = [
         path: 'moderator',
         canActivate: [AuthGuard, RolesGuard],
         data: {
-            allowedRoles: ['admin', 'moderator']
+            allowedRoles: ['ADMIN', 'SUPERADMIN']
         },
         loadChildren: () => import('./moderator/moderator.module').then(m => m.ModeratorModule)
     },

@@ -1,13 +1,15 @@
+from cgitb import lookup
 import json
 from django.conf import settings
 from django.shortcuts import render
+from rest_framework import permissions
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
-from rest_framework import mixins, views
+from rest_framework import mixins, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt import authentication
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
-from .serializers import CookieTokenRefreshSerializer, UserRegisterSerializer
+from .serializers import CookieTokenRefreshSerializer, ProfileSerializer, UserRegisterSerializer
 from .backends import CookieJWTAuthentication
 from .models import User
 from .serializers import SessionSerializer
@@ -26,7 +28,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
             user = User.objects.get(email=request.data['email'])
             serializer = SessionSerializer(user)
             response.set_cookie(
-                'bruser', quote(json.dumps(serializer.data)), max_age=cookie_max_age
+                'gcuser', quote(json.dumps(serializer.data)), max_age=cookie_max_age
             )
             response.set_cookie(
                 settings.JWT_AUTH['JWT_AUTH_COOKIE'], response.data['access'], max_age=cookie_max_age, httponly=True)
@@ -53,7 +55,7 @@ class CookieTokenRefreshView(TokenRefreshView):
             user = User.objects.get(email=request.user.email)
             serializer = SessionSerializer(user)
             response.set_cookie(
-                'bruser', quote(json.dumps(serializer.data)), max_age=cookie_max_age
+                'gcuser', quote(json.dumps(serializer.data)), max_age=cookie_max_age
             )
             response.set_cookie(
                 settings.JWT_AUTH['JWT_AUTH_COOKIE'], response.data['access'], max_age=cookie_max_age, httponly=True)
@@ -77,5 +79,24 @@ class LogoutView(views.APIView):
         response = Response({'ok': True})
         response.delete_cookie(settings.JWT_AUTH['JWT_AUTH_COOKIE'])
         response.delete_cookie(settings.JWT_AUTH['JWT_REFRESH_COOKIE'])
-        response.delete_cookie('bruser')
+        response.delete_cookie('gcuser')
         return response
+
+class ProfileView(mixins.RetrieveModelMixin, GenericViewSet):
+    permissions_classes = (IsAuthenticated)
+    serializer_class = ProfileSerializer
+    lookup_field = 'username'
+    queryset = User.objects.all()
+
+    def details(self, request, *args, **kwargs):
+        follow = self.get_object()
+        serializer_context = {
+            'user': request.user,
+            'follow': follow
+        }
+        serializer = self.serializer_class(
+            follow,
+            context=serializer_context
+        )
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

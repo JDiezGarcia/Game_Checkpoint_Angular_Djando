@@ -3,18 +3,18 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="profile.img" class="user-img" />
-          <h4>{{ profile.user }}</h4>
+          <img [src]="profile.img ? 'api/data/img/users/' + profile.img : '/api/data/img/users/default.png'" class="user-img" width="100px" />
+          <h4>{{ profile.username }}</h4>
           <p>{{ profile.name }}</p>
           <p>{{ profile.title }}</p>
 
-          <a
+          <!-- COMING NEXT <a
             [routerLink]="['/settings']"
             [hidden]="!isUser"
             class="btn btn-sm btn-outline-secondary action-btn"
           >
             <i class="fa fa-gear"></i> Edit Profile Settings
-          </a>
+          </a> -->
           <a
             *ngIf="!profile.following"
             (click)="toggleFollowing(true)"
@@ -59,9 +59,8 @@
                 class="nav-link"
                 (click)="changeStatus('pending')"
                 [ngClass]="{
-                  active:
-                    gamesStatus === 'pending' && statusCount.pending !== 0,
-                  disabled: statusCount.pending === 0
+                    active: gamesStatus === 'pending' && statusCount.pending !== 0,
+                    disabled: statusCount.pending === 0
                 }"
               >
                 Pending({{ statusCount.pending }})

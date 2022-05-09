@@ -6,15 +6,15 @@
     <div class="card-block">
       <div class="comment-user">
         <div class="user-img">
-          <a [routerLink]="['/profile', author.user]">
+          <a [routerLink]="['/profile', author.username]">
             <img [src]="author.img" class="comment-author-img" />
           </a>
         </div>
         <div class="user-data">
           <span class="thumbnail">
             <span class="user-name">
-              <a [routerLink]="['/profile', author.user]">
-                {{ author.user }}
+              <a [routerLink]="['/profile', author.username]">
+                {{ author.username }}
               </a>
             </span>
             <span class="user-title"> [{{ author.title }}] </span>

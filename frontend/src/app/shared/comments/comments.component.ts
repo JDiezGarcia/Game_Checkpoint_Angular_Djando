@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
-
 import { Comment, Thumbnail, User, UserService, PostCommentConfig, CommentsService } from '../../core';
 import { Subscription } from 'rxjs';
 
@@ -47,7 +46,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     // Load the current user's data
     this.subscription = this.userService.currentUser.subscribe(
       (userData: User) => {
-        this.canModify = (userData.user === this.author.user);
+        this.canModify = (userData.username === this.author.username);
       }
     );
   }

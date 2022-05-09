@@ -30,22 +30,21 @@
   <button
     class="custom-button login btn"
     id="navbar-login"
-    [routerLink]="['/profile', currentUser.user]"
+    [routerLink]="['/profile', currentUser.username]"
     routerLinkActive="active"
   >
     <span>
       <div class="profile" id="profile-icon">
         <img
           style="max-width: 30px"
-          [src]="currentUser.img"
-          *ngIf="currentUser.img"
+          [src]="currentUser.img ? 'api/data/img/users/' + currentUser.img : 'api/data/img/users/default.png'"
         />
-        <span> {{ currentUser.user }}</span>
+        <span> {{ currentUser.username }}</span>
       </div>
     </span>
   </button>
 
-  <button
+  <!-- ADD IN A FUTURE <button
     class="custom-button settings btn"
     id="navbar-settings"
     routerLink="/settings"
@@ -54,7 +53,8 @@
     <span>
       <i class="fa fa-cog" id="setting-icon"> </i>
     </span>
-  </button>
+  </button> -->
+  
   <button
     class="custom-button settings btn"
     id="navbar-settings"

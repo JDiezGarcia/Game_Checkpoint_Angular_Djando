@@ -52,7 +52,8 @@ export class ProfileComponent implements OnInit {
                 return this.userService.currentUser.pipe(tap(
                     (userData: User) => {
                         this.currentUser = userData;
-                        this.isUser = (this.currentUser.user === this.profile.user);
+                        this.isUser = (this.currentUser.username === this.profile.username);
+                        console.log(this.currentUser, this.profile, this.isUser)
                     }
                 ));
             })
@@ -60,7 +61,7 @@ export class ProfileComponent implements OnInit {
 
         this.listConfig = {
             type: this.gamesStatus,
-            user: this.profile.user,
+            user: this.profile.username,
             filters: {
                 limit: 3,
                 offset: 0
@@ -69,7 +70,7 @@ export class ProfileComponent implements OnInit {
 
         this.commentConfig = {
             type: 'user',
-            id: this.profile.user,
+            id: this.profile.username,
             reply: {
                 is: "no"
             }
@@ -114,9 +115,9 @@ export class ProfileComponent implements OnInit {
     toggleFollowing(following: boolean) {
 
         if (following) {
-            this.profileService.follow(this.profile.user).subscribe();
+            this.profileService.follow(this.profile.username).subscribe();
         } else {
-            this.profileService.unfollow(this.profile.user).subscribe();
+            this.profileService.unfollow(this.profile.username).subscribe();
         }
         this.profile.following = following;
     }

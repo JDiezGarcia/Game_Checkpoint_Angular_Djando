@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CookieService } from 'ngx-cookie-service';
 
 import { GamesModule } from './games/games.module';
 import { DetailsModule } from './details/details.module';
@@ -32,7 +33,7 @@ import { AuthModule } from './auth/auth.module';
     ModeratorModule,
     CoreModule,
     AuthModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

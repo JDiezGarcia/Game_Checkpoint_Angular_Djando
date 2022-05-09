@@ -13,16 +13,16 @@ export class ProfilesService {
     ) { }
 
     get(user: string): Observable<Profile> {
-        return this.apiService.get('/profiles/' + user)
-            .pipe(map((data: { profile: Profile }) => data.profile));
+        return this.apiService.get('profiles/' + user)
+            .pipe(map((data: Profile ) => data));
     }
 
     follow(user: string): Observable<Profile> {
-        return this.apiService.post('/profiles/' + user + '/follow');
+        return this.apiService.post('profiles/' + user + '/follow');
     }
 
     unfollow(user: string): Observable<Profile> {
-        return this.apiService.delete('/profiles/' + user + '/follow');
+        return this.apiService.delete('profiles/' + user + '/follow');
     }
 
     query(user: string, type: string): Observable<{
@@ -33,7 +33,7 @@ export class ProfilesService {
             finished: number,
         }
     }> {
-        return this.apiService.get('/profiles/' + user + '/games', new HttpParams({ fromObject: { type: type } }))
+        return this.apiService.get('profiles/' + user + '/games', new HttpParams({ fromObject: { type: type } }))
             .pipe(
                 map((data) => {
                     return data;
@@ -43,7 +43,7 @@ export class ProfilesService {
 
     searchUsers(query: string, limit: number): Observable<Thumbnail[]> {
         let arr: Thumbnail[] = [];
-        return this.apiService.get('/profiles/search/users', new HttpParams({ fromObject: { query: query, limit: limit } }))
+        return this.apiService.get('profiles/search/users', new HttpParams({ fromObject: { query: query, limit: limit } }))
         .pipe(
             map((data) => {
                 arr = data.users;

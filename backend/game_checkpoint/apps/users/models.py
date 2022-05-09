@@ -58,9 +58,10 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
     username = models.CharField(max_length=40, unique=True)
     password = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     role = models.CharField(choices=ROLE_CHOICES, default='USER', max_length=32)
     image = models.FileField(upload_to='img/users', validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'jpeg'])])
-
+    respect = models.IntegerField(default=0)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'role']
     objects = UserManager()
@@ -72,3 +73,10 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
     @property
     def is_superuser(self):
         return self.role == 'SUPERADMIN'
+
+class Follow(models.Model):
+    follower = models.ForeignKey(User, related_name='follower', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return str(self.follower) + ' ('+ str(self.id) +')'

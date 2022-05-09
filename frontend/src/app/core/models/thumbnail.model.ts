@@ -1,13 +1,13 @@
 export class Thumbnail {
-    user: string;
+    username: string;
     img: string;
     title: string;
     constructor(
-        user: string,
+        username: string,
         img: string,
         title: string,
     ) {
-        this.user = user;
+        this.username = username;
         this.img = img;
         this.title = title;
     }

@@ -4,10 +4,10 @@
     <div class="fa-stack fa-1x">
       <i class="fas fa-square fa-stack-2x"></i>
       <i class="fa fa-plus fa-stack-1x fa-inverse"
-      (click)=follow(infoGame.slug)
+      (click)="follow(infoGame.slug)"
       [hidden]='infoGame.status'></i>
       <i class="fa fa-check fa-stack-1x fa-inverse" 
-      (click)=unfollow(infoGame.slug) 
+      (click)="unfollow(infoGame.slug)"
       [hidden]='!infoGame.status'></i>
     </div>
 

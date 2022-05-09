@@ -1,6 +1,6 @@
 export class User {
     email: string;
-    user: string;
+    username: string;
     name: string;
     img: string;
     title: string;
@@ -9,7 +9,7 @@ export class User {
 
     constructor(
         email: string,
-        user: string,
+        username: string,
         name: string,
         img: string,
         title: string,
@@ -17,7 +17,7 @@ export class User {
         role: string
     ) {
         this.email = email;
-        this.user = user;
+        this.username = username;
         this.name = name;
         this.img = img;
         this.title = title;
