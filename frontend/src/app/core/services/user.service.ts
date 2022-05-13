@@ -60,14 +60,26 @@ export class UserService {
         this.currentRoleSubject.next('');
     }
 
-    attemptAuth(type: String, credentials: Object): Observable<User> {
-        const route = (type === 'login') ? '/login' : '';
+    attemptAuth(type: String, credentials: {email: string, password: string, username?: string}): Observable<User> {
+        const route = (type === 'login') ? '/login' : '/register';
+        this.purgeAuth();
         return this.apiService.post('auth' + route, credentials)
             .pipe(map(
                 data => {
-                    console.log(data)
-                    this.setAuth(data.access);
-                    return data;
+                    if(type === 'register'){
+                        return this.apiService.post('auth/login', {email: credentials.email, password: credentials.password} ).subscribe(
+                            (data: any) => {
+                                this.setAuth(data.access);
+                                return data;
+                            },
+                            (err: any) => {
+                                return err;
+                            }
+                        )
+                    }else {
+                        this.setAuth(data.access);
+                        return data;
+                    }
                 }
             ));
     }

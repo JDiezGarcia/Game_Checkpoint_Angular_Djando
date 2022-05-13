@@ -3,20 +3,23 @@ import { Component, Input } from '@angular/core';
 import { Errors } from '../core';
 
 @Component({
-  selector: 'app-list-errors',
-  templateUrl: './list-errors.component.html'
+    selector: 'app-list-errors',
+    templateUrl: './list-errors.component.html'
 })
 export class ListErrorsComponent {
-  formattedErrors: Array<string> = [];
+    formattedErrors: Array<string> = [];
 
-  @Input()
-  set errors(errorList: Errors) {
-    console.log(errorList)
-    this.formattedErrors = Object.keys(errorList.errors || {})
-      .map(key => `${key} ${errorList.errors[key]}`);
-  }
+    @Input()
+    set errors(errorList: Errors) {
+        if (errorList?.detail) {
+            this.formattedErrors = [`Auth: ${errorList.detail}`]; 
+        }else{
+            this.formattedErrors = Object.keys(errorList.errors || {})
+                .map(key => `${key} ${errorList.errors[key]}`);
+        }
+    }
 
-  get errorList() { return this.formattedErrors; }
+    get errorList() { return this.formattedErrors; }
 
 
 }
