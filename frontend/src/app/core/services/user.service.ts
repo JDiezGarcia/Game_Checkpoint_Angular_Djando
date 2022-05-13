@@ -37,9 +37,23 @@ export class UserService {
         }
     }
 
+    parseCookie(name: string) {
+        try {
+            var c = this.cookieService.get(name);
+            if (c.startsWith('"') && c.endsWith('"')) {
+                c = c.substring(1, c.length - 1);
+            }
+
+            return JSON.parse(c);
+        } catch (e) {
+            return null;
+        }
+    }
+
     setAuth(token: string) {
         // Save JWT sent from server in localstorage
-        let user: User = JSON.parse(this.cookieService.get('gcuser'));
+        let user: User = this.parseCookie('gcuser');
+
         this.jwtService.saveToken(token);
         // Set current user data into observable
         this.currentUserSubject.next(user);
@@ -60,14 +74,14 @@ export class UserService {
         this.currentRoleSubject.next('');
     }
 
-    attemptAuth(type: String, credentials: {email: string, password: string, username?: string}): Observable<User> {
+    attemptAuth(type: String, credentials: { email: string, password: string, username?: string }): Observable<User> {
         const route = (type === 'login') ? '/login' : '/register';
         this.purgeAuth();
         return this.apiService.post('auth' + route, credentials)
             .pipe(map(
                 data => {
-                    if(type === 'register'){
-                        return this.apiService.post('auth/login', {email: credentials.email, password: credentials.password} ).subscribe(
+                    if (type === 'register') {
+                        return this.apiService.post('auth/login', { email: credentials.email, password: credentials.password }).subscribe(
                             (data: any) => {
                                 this.setAuth(data.access);
                                 return data;
@@ -76,7 +90,7 @@ export class UserService {
                                 return err;
                             }
                         )
-                    }else {
+                    } else {
                         this.setAuth(data.access);
                         return data;
                     }

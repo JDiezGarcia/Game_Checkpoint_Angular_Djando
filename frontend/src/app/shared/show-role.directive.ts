@@ -21,7 +21,7 @@ export class ShowRoleDirective implements OnInit {
   ngOnInit() {
     this.userService.currentRole.subscribe(
       (role) => {
-        if (role === this.condition || role === 'admin') {
+        if (role === this.condition || role === 'ADMIN' || role === 'SUPERADMIN') {
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
           this.viewContainer.clear();

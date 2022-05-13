@@ -37,7 +37,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'test')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('ENV', None) != 'prod'
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'localhost:21011', 'comet.uvias.com' ,'comet.uvias.com:21011']
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://localhost:21011', 'http://comet.uvias.com:21011/']
 
 # Application definition
 
