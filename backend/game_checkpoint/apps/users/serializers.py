@@ -78,4 +78,3 @@ class FollowSerializer(serializers.ModelSerializer):
             follower=self.context['user'], 
             following=self.context['follow']
         ).delete()
- 

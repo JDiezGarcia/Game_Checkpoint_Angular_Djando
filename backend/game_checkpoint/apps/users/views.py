@@ -1,15 +1,14 @@
-from cgitb import lookup
 import json
 from django.conf import settings
 from django.shortcuts import render
-from rest_framework import permissions
+from rest_framework import permissions, views, viewsets
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from rest_framework import mixins, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt import authentication
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
-from .serializers import CookieTokenRefreshSerializer, ProfileSerializer, UserRegisterSerializer, FollowSerializer, SessionSerializer
+from .serializers import CookieTokenRefreshSerializer, ProfileSerializer, ThumbnailSerializer, UserRegisterSerializer, FollowSerializer, SessionSerializer
 from .backends import CookieJWTAuthentication
 from .models import User
 from urllib.parse import quote
@@ -30,11 +29,11 @@ class CookieTokenObtainPairView(TokenObtainPairView):
                 'gcuser', quote(json.dumps(serializer.data)), max_age=cookie_max_age
             )
             response.set_cookie(
-                settings.JWT_AUTH['JWT_AUTH_COOKIE'], response.data['access'], max_age=cookie_max_age, httponly=True)
+                settings.JWT_AUTH['JWT_AUTH_COOKIE'], response.data['access'], max_age=cookie_max_age, httponly=False)
 
         if response.data.get('refresh'):
             response.set_cookie(settings.JWT_AUTH['JWT_REFRESH_COOKIE'],
-                                response.data['refresh'], max_age=cookie_max_age, httponly=True)
+                                response.data['refresh'], max_age=cookie_max_age, httponly=False)
             del response.data['refresh']
 
         return super().finalize_response(request, response, *args, **kwargs)
@@ -131,3 +130,19 @@ class FollowView(mixins.CreateModelMixin, mixins.DestroyModelMixin, GenericViewS
         )
         serializer.delete()
         return Response({'mgs': 'Successfuly create'}, status=status.HTTP_200_OK)
+
+class SearchViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+        query = self.request.query_params.get('query')
+        limit = self.request.query_params.get('limit')
+        print(query, limit, 'aaaaaaaa')
+        if query is not None and limit is not None:
+            queryset = queryset.filter(username__icontains=query)[0:int(limit)]
+
+        return queryset
+    
+    def get_serializer_class(self):
+        return ThumbnailSerializer

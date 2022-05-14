@@ -27,21 +27,21 @@ export class SearchBarComponent {
     searchItems(query: string) {
         this.filters.query = query;
         if (query.length > 0) {
-            this.gamesService.query(this.filters).subscribe((data) => {
-                this.noQuery = false;
-                if (data.gamesCount > 0) {
-                    this.noMatchG = false;
-                    this.searchGames = data.games;
-                    console.log(data.games)
-                }else{
-                    this.noMatchG = true;
-                }
-            });
+            // this.gamesService.query(this.filters).subscribe((data) => {
+            //     this.noQuery = false;
+            //     if (data.gamesCount > 0) {
+            //         this.noMatchG = false;
+            //         this.searchGames = data.games;
+            //         console.log(data.games)
+            //     }else{
+            //         this.noMatchG = true;
+            //     }
+            // });
             this.profileService.searchUsers(query, 3).subscribe((data) => {
-                console.log(data);
                 if (data.length > 0) {
                     this.noMatchU = false;
                     this.searchUsers = data;
+                    this.noQuery = false;
                 }else{
                     this.noMatchU = true;
                 }

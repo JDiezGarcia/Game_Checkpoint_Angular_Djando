@@ -43,10 +43,10 @@ export class ProfilesService {
 
     searchUsers(query: string, limit: number): Observable<Thumbnail[]> {
         let arr: Thumbnail[] = [];
-        return this.apiService.get('profiles/search/users', new HttpParams({ fromObject: { query: query, limit: limit } }))
+        return this.apiService.get('profiles/search', new HttpParams({ fromObject: { query: query, limit: limit } }))
         .pipe(
             map((data) => {
-                arr = data.users;
+                arr = data.results;
                 return arr;
         })
         );

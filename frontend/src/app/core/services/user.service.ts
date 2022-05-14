@@ -29,10 +29,9 @@ export class UserService {
     // This runs once on application startup.
     populate() {
         // If JWT detected, attempt to get & store user's info
-        if (this.jwtService.getToken()) {
-            this.setAuth(this.cookieService.get('gcsession'));
+        if (this.cookieService.check('gcuser')) {
+            this.setAuth(this.jwtService.getToken());
         } else {
-            // Remove any potential remnants of previous auth states
             this.purgeAuth();
         }
     }
@@ -50,7 +49,7 @@ export class UserService {
         }
     }
 
-    setAuth(token: string) {
+    setAuth(token: String) {
         // Save JWT sent from server in localstorage
         let user: User = this.parseCookie('gcuser');
 
