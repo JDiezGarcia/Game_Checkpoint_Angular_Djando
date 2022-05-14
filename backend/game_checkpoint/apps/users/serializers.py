@@ -3,7 +3,7 @@ from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from game_checkpoint.apps.users.models import Follow
 from rest_framework_simplejwt.exceptions import InvalidToken
 from django.contrib.auth import get_user_model
-from .models import User
+from .models import User, Follow
 
 class CookieTokenRefreshSerializer(TokenRefreshSerializer):
     refresh = None
@@ -62,3 +62,20 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         )
 
         return user
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+    
+    def create(self):
+        return Follow.objects.create(
+            follower=self.context['user'], 
+            following=self.context['follow']
+        )
+
+    def delete(self):
+        return Follow.objects.filter(
+            follower=self.context['user'], 
+            following=self.context['follow']
+        ).delete()
+ 

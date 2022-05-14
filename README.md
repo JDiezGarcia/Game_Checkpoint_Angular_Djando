@@ -1,11 +1,5 @@
-# Bike Rider
-
-Creators:
-
-- [Fco. Javier Diez Garcia](https://github.com/JDiezGarcia)
-- [Ivan Ferrer](https://github.com/iferrer20)
-- [Juan Jose Paya](https://github.com/jjpaya)
-
+# Game Checkpoint
+Creator: Fco. Javier Diez Garcia
 
 Type: CFGS Proyect
 
@@ -14,110 +8,114 @@ School: IES L'Estacio
 Degree: Web Applications Development
 
 # Index
-- [Bike Rider](#bike-rider)
+- [Game Checkpoint](#game-checkpoint)
 - [Index](#index)
 - [Introduction](#introduction)
-- [Also see](#also-see)
 - [Content](#content)
-  - [Web](#web)
-    - [HEADER WEB](#header-web)
-    - [MAIN](#main)
-    - [FOOTER](#footer)
-  - [Panel](#panel)
-    - [HEADER PANEL](#header-panel)
-    - [TABPANEL](#tabpanel)
-  - [Station](#station)
-  - [Admin](#admin)
+  - [Header](#header)
+  - [User Page](#user-page)
+  - [Game List](#game-list)
+  - [Game Details](#game-details)
+  - [Log](#log)
+  - [Profile](#profile)
+  - [Settings](#settings)
+  - [Moderator Panel](#moderator-panel)
+  - [Footer](#footer)
 - [Technologies](#technologies)
+- [Libs](#libs)
+- [Updates](#updates)
 
 # Introduction
+***
 
-What is Bike Rider?
+What is Game Checkpoint?
 
-It is a structured platform for renting bikes, send tickets, search the closest station and make a reservation. Also in the panel site, a MAINTENANCE user can search his supervised stations, see if any of the bike there have a ticket or the station it self have any, and can list all bikes with tickets on the road, a SUPPORT use can see all user tickets related and send a email to reply them. Admin and Super Admin can access Server Panel, but Admin only will have create, update (some), and  read permissions. A finally will have the STATION PANEL, that will allow to configure it, hook and unhook bikes, login and send tickets.
+Is a platform to have all game that you have and will have to give them a follow up on their progress, you will have games on Favorites, Pending, Playing and Finished (One or more times). You will have the posibility of following your friends and find their tastes in video games to have suggestions or leave them a comment about their taste.
 
-# Also see
-Here you have a link with the installation tutorial:
-[INSTALLATION](./INSTALL.md#Bike-Rider-install-and-configuration-steps).
-
-And the document explaining the design of the application can be read here:
-[DESIGN](./DESIGN.md).
 
 # Content
 
-## Web
+## Header
+***
 | SECTION | FEATURES |
 | - | - |
-| Header |  Nav menu with all the pages. It will show menu links and ticket if you are logged into the web, if you aren't, only login button will be shown.|
-| Main | This will contain a map with pins and a circumference to search stations|
+| Menu |  Nav menu with all the pages. It will show if you are log into the web |
+| Logo | Favicon of the website. |
+| Search | Search in the data base for games and users, showing a image, name, if you click on the cart you will be going to the details of the game, if you click or press enter to search the query, if no game have that query the search bar notify you and if it has it will redirect you to the game list. It will show if your log into the web |
+| Log | You will have to nav to go, Login and Register once you register your account o log this section will disapear to give you your profile button, your settings and log ut button |
+> This section is the same in all the pages and he's features works in all of them
 
-> This section is the same in all the pages, except on Panel, Station and Admin that will disappear
+
+## User Page
 ***
-### HEADER WEB
 | SECTION | FEATURES |
 | - | - |
-| Ticket | Open a modal with a form to send tickets. |
-| Menu Links | It will have all links to Panel ( If a user is log and have role SUPPORT O MAINTAINER ) or Admin (If a user is log and have role ). |
-| Login | You have to click the button you can login or sign up . |
-| Thumbnail | A menu to see your reservation, to change and see your subscription, another to use coupons and finally to logout. |
-***
-### MAIN
-| Section | Features |
-| - | - |
-| Map | Only will show the map, with a circumference that you can move, then will show all the station on the circumference. If you click it, will show a pop up with the station info and a timer of reservations, if you're log it shows a button to do a booking. |
-***
-### FOOTER
-| Section | Features |
-| - | - |
-| Terms and Condition | Link to a document of Terms and Condition |
-| Cookie Terms | Link to a document of Cookie Terms |
-> This section is only shown on web, in client site
+| Carousel | Categories recomended that will bring you in  to the game list with that category selected|
+| In Progress | You will have a list of the 2 states of your games, playing and pending.|
 
-## Panel
-| Section | Features |
-| - | - |
-| Header | Button to go back |
-| TabPanel| A tab with 2 option in Maintenance Role and 1 on Support  |
+## Game List
 ***
-### HEADER PANEL
 | Section | Features |
 | - | - |
-| Button | A button to go back to client site |
-***
-### TABPANEL
-| Section | Features |
-| - | - |
-| Tabs | Three tabs to navigate between pages, only two to maintenance user and two  |
-| Pages | Maintenance: First a map with all station supervised by the user maintainer and second a list with all the bikes on the road with their tickets and you can change status; Support: A list of all tickets, you can reply and send emails to their senders. |
-> This section is only for Support and Maintenance Users
->
-## Station
-| Section | Features |
-| - | - |
-| Header | Once your log into the totem, you will see 2 buttons, to send a issue or logout and the name of the station. If your not log you only will see the name. |
-| Main Screen | You will have the the login if is't a user log, but if is log it will show all the slots of the station, with the status of the bike and if they have a reservation. If the station isn't configure, will show a page to send the token. |
-| Hardware Panel | You can hook the bikes and only if the slot is empty. |
+| Game List | A list that is load depending of the previous action (search, category or filters. When we were over the games it will show a eye to see is details and in the left up corner a button to follow the game. |
+| Categories | Checkboxes with a game counter, that will show you the game with that category. |
+| Pagination | The pagination will navigate you from page to page if there is enough games to have one, that can be config.|
 
-> This section only can be configure by a maintainer.
-
-## Admin
+## Game Details
+***
 | Section | Features |
 | - | - |
-| Permissions Group | Only Admin and SuperAdmins are allow, the admins only have Read, Update (In some tables), Create(In some tables) and Delete (Only on Coupon Table) |
-| Content | We have all tables, with custom fields and forms with custom heads. |
-> This section is only for Admins or Super Admins
+| Info | This section will have all game information.|
+| Follow | This is a list of three status (Pending, Playing, Finished or Unfollow in the case that you already follow the game), that will change the status. |
+| Favorite | A button to add a game to your favorites or unfavorite them. |
+| Comments | You can writte comments in their details been respectful and don't writting spoilers about the games. You can reply the messages but only have one comment depth (can be change in the configuration) reference.|
+
+## Log
 ***
+| Section | Features |
+| - | - |
+| Login | Page with a small form to log in and it will show if any error accurs.|
+| Register | Another Page this time with another field to have the user and the same thing will happen if some error accurs. |
+
+## Profile
+***
+| Section | Features |
+| - | - |
+| Info | This section will have all user information with a small button that navigate you to your settings if is your Profile.|
+| Follow | You have a button to follow and unfollow the users. |
+| Game List | This is a list without pagination with 3 buttons (Pending, Playing, Finished), that will change the layout and see games with that status. |
+| Comments | You can writte comments in their profile or in yours all way been respectful and dont writting spoilers about the games. You can reply the messages but only have one comment depth (can be change in the configuration) reference.|
+
+## Settings
+****
+| Section | Features |
+| - | - |
+| Form | In this form you will have all the information and the empty fields about your profile, you can change any field if it is possible ( user or email if their aren't taken by other users ) |
+
+## Moderator Panel
+****
+| Section | Features |
+| - | - |
+| In progress | This section is only for now a test of user roles, only show up if the user had moderator or admin privileges |
+
+## Footer
+
+| Section | Features |
+| - | - |
+| Footer | A simple footer with informacion |
+> This section is the same in all the pages and he's features works in all of them
 
 # Technologies
 
-* [NodeJS](https://nodejs.org/): Version 14.0.0
-* [Docker](https://www.docker.com/): Version 20.10.7
-* [Nginx](http://nginx.org/): Version 1.21.5
-* [React.js](https://reactjs.org/): Version 17.0.2
-* [MUI](https://mui.com/): Version 5.3.0
-* [SASS](https://sass-lang.com/): Version 1.49.0
-* [Django](https://www.djangoproject.com/): Version 4.0.2
-* [Python](https://www.python.org/): Version 3
-* [Javascript](https://developer.mozilla.org/es/docs/Web/JavaScript): Version ES6
-* [Postgres](https://www.postgresql.org/): Version 14.1
-* [PGAdmin](https://www.pgadmin.org/): Version 4
+* [NodeJS](https://nodejs.org/): Version 16.9.1
+* [AngularCli](https://angular.io/): Version 12.2.6
+* [Typescript](https://www.typescriptlang.org/): Version 4.3.5
+* [MongoDB](https://www.mongodb.com/): Version 4.4.5
+
+# Libs
+
+* [Font Awesome](https://fontawesome.com/): Version 5.14.0
+
+# Updates
+
+Some comming soon

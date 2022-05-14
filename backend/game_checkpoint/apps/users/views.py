@@ -9,10 +9,9 @@ from rest_framework import mixins, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt import authentication
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
-from .serializers import CookieTokenRefreshSerializer, ProfileSerializer, UserRegisterSerializer
+from .serializers import CookieTokenRefreshSerializer, ProfileSerializer, UserRegisterSerializer, FollowSerializer, SessionSerializer
 from .backends import CookieJWTAuthentication
 from .models import User
-from .serializers import SessionSerializer
 from urllib.parse import quote
 
 class CookieTokenObtainPairView(TokenObtainPairView):
@@ -100,3 +99,35 @@ class ProfileView(mixins.RetrieveModelMixin, GenericViewSet):
         )
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class FollowView(mixins.CreateModelMixin, mixins.DestroyModelMixin, GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = FollowSerializer
+    lookup_field = 'username'
+    queryset = User.objects.all()
+
+    def follow(self, request, *args, **kwargs):
+        follow = self.get_object()
+        serializer_context = {
+            'user': request.user,
+            'follow': follow
+        }
+        serializer = self.serializer_class(
+            follow,
+            context=serializer_context
+        )
+        serializer.create()
+        return Response({'mgs': 'Successfuly create'}, status=status.HTTP_200_OK)
+
+    def unfollow(self, request, *args, **kwargs):
+        follow = self.get_object()
+        serializer_context = {
+            'user': request.user,
+            'follow': follow
+        }
+        serializer = self.serializer_class(
+            follow,
+            context=serializer_context
+        )
+        serializer.delete()
+        return Response({'mgs': 'Successfuly create'}, status=status.HTTP_200_OK)
