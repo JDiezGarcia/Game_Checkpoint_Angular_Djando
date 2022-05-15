@@ -10,7 +10,7 @@ STAFF_PERMS = {
         # 'coupon'
     ): ['view', 'change', 'add'],
 
-    ('user', 'logentry', 'permission'): ['view']
+    ('user', 'follow' ,'logentry', 'permission'): ['view']
 }
 
 class Command(BaseCommand):

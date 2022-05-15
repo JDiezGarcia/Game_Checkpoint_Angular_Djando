@@ -22,14 +22,3 @@ def to_float_or_none(strn):
 #         if user and user.is_authenticated and (user.is_superuser or user.role == 'MAINTENANCE'):
 #             return super(MaintenancePrivateField, self).get_attribute(instance)
 #         return None
-
-
-# ORM functions
-class ApproxDistance(Func):
-    function = 'approxDistance'
-    arity = 4
-
-
-class Distance(Func):
-    function = 'distance'
-    arity = 4
