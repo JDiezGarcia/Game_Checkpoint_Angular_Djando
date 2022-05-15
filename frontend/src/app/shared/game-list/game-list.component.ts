@@ -44,18 +44,18 @@ export class GameListComponent {
     loadGames() {
         this.loading = true;
         this.results = [];
-        if (this.type === 'all') {
-            this.gamesService.query(this.query).subscribe((data) => {
-                this.loading = false;
-                this.results = data.games;
-                this.setTotalGame.emit(data.gamesCount);
-            });
-        } else {
-            this.profileService.query(this.user, this.type).subscribe((data) => {
-                this.loading = false;
-                this.results = data.games;
-                this.setStatus.emit(data.gamesCounts)
-            })
-        }
+        // if (this.type === 'all') {
+        //     this.gamesService.query(this.query).subscribe((data) => {
+        //         this.loading = false;
+        //         this.results = data.games;
+        //         this.setTotalGame.emit(data.gamesCount);
+        //     });
+        // } else {
+        //     this.profileService.query(this.user, this.type).subscribe((data) => {
+        //         this.loading = false;
+        //         this.results = data.games;
+        //         this.setStatus.emit(data.gamesCounts)
+        //     })
+        // }
     }
 }

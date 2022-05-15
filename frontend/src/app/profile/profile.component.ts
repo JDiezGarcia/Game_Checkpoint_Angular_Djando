@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit {
         }
 
         this.comments = this.profile.comments as any;
-        this.orderComments();
+        //this.orderComments();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
