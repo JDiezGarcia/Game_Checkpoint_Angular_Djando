@@ -7,7 +7,7 @@
       <div class="comment-user">
         <div class="user-img">
           <a [routerLink]="['/profile', author.username]">
-            <img [src]="author.img" class="comment-author-img" />
+            <img [src]="author.image ? 'api/data/' + author.image : 'api/data/img/users/default.png' " class="comment-author-img" />
           </a>
         </div>
         <div class="user-data">

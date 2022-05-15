@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="profile.img ? 'api/data/img/users/' + profile.img : '/api/data/img/users/default.png'" class="user-img" width="100px" />
+          <img [src]="profile.image ? 'api/data/' + profile.image : '/api/data/img/users/default.png'" class="user-img" width="100px" />
           <h4>{{ profile.username }}</h4>
           <p>{{ profile.name }}</p>
           <p>{{ profile.title }}</p>

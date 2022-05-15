@@ -2,7 +2,7 @@ export class Profile {
     email: string;
     username: string;
     name: string;
-    img: string;
+    image: string;
     title: string;
     following: boolean;
     comments: Comment[];
@@ -11,7 +11,7 @@ export class Profile {
         email: string,
         username: string,
         name: string,
-        img: string,
+        image: string,
         title: string,
         following: boolean,
         comments: Comment[]
@@ -19,7 +19,7 @@ export class Profile {
         this.email = email;
         this.username = username;
         this.name = name;
-        this.img = img;
+        this.image = image;
         this.title = title;
         this.following = following;
         this.comments = comments;

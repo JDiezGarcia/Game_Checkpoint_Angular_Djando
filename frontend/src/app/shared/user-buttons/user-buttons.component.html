@@ -37,7 +37,7 @@
       <div class="profile" id="profile-icon">
         <img
           style="max-width: 30px"
-          [src]="currentUser.img ? 'api/data/img/users/' + currentUser.img : 'api/data/img/users/default.png'"
+          [src]="currentUser.image ? 'api/data/' + currentUser.image : 'api/data/img/users/default.png'"
         />
         <span> {{ currentUser.username }}</span>
       </div>

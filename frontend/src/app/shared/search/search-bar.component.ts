@@ -41,6 +41,7 @@ export class SearchBarComponent {
                 if (data.length > 0) {
                     this.noMatchU = false;
                     this.searchUsers = data;
+                    console.log(this.searchUsers)
                     this.noQuery = false;
                 }else{
                     this.noMatchU = true;

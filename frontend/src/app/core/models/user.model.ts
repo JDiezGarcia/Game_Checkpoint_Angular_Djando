@@ -2,7 +2,7 @@ export class User {
     email: string;
     username: string;
     name: string;
-    img: string;
+    image: string;
     title: string;
     token: string;
     role: string;
@@ -11,7 +11,7 @@ export class User {
         email: string,
         username: string,
         name: string,
-        img: string,
+        image: string,
         title: string,
         token: string,
         role: string
@@ -19,7 +19,7 @@ export class User {
         this.email = email;
         this.username = username;
         this.name = name;
-        this.img = img;
+        this.image = image;
         this.title = title;
         this.token = token;
         this.role = role;
