@@ -110,7 +110,13 @@ Is a platform to have all game that you have and will have to give them a follow
 * [NodeJS](https://nodejs.org/): Version 16.9.1
 * [AngularCli](https://angular.io/): Version 12.2.6
 * [Typescript](https://www.typescriptlang.org/): Version 4.3.5
-* [MongoDB](https://www.mongodb.com/): Version 4.4.5
+* [Docker](https://www.docker.com/): Version 20.10.7
+* [Nginx](http://nginx.org/): Version 1.21.5
+* [SASS](https://sass-lang.com/): Version 1.49.0
+* [Django](https://www.djangoproject.com/): Version 4.0.2
+* [Python](https://www.python.org/): Version 3
+* [Postgres](https://www.postgresql.org/): Version 14.1
+* [PGAdmin](https://www.pgadmin.org/): Version 4
 
 # Libs
 
